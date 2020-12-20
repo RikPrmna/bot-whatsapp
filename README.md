@@ -1,4 +1,4 @@
-• bot-wa by Shuichi
+• bot-whatsapp by Shuichi
 
  Cara install bot:
 
