@@ -8,7 +8,7 @@ $ pkg update && pkg upgrade
 
 $ git clone https://github.com/Shuichi126/bot-whatsapp
 
-$ cd bot-wa
+$ cd bot-whatsapp
 
 $ pkg install wget
 
