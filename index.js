@@ -236,7 +236,9 @@ axios.get(`https://arugaz.herokuapp.com/api/howbucins`).then((res) => {
 })
 }
 
-if (text == '#help'){
+if (text == '#help')
+if(key.fromme) return
+{
 const corohelp = await get.get('https://covid19.mathdro.id/api/countries/id').json()
 var date = new Date();
 var tahun = date.getFullYear();
