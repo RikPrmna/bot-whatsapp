@@ -208,6 +208,7 @@ axios.get(`https://arugaz.herokuapp.com/api/spamsms?no=${teks}&jum=20`).then((re
 	conn.sendMessage(id, '[WAIT] Proses...❗', MessageType.text)
     let hasil = ` *INFO SPAM SMS 20 PESAN* \n\n _${res.data.logs}_`;
     conn.sendMessage(id, hasil ,MessageType.text);
+if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
 })
 }
 
