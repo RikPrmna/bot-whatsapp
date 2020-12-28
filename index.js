@@ -287,10 +287,19 @@ axios.get('https://api.banghasan.com/quran/format/json/acak').then((res) => {
     let hasil = `[${ket}]   ${res.data.acak.ar.teks}\n\n${res.data.acak.id.teks}(QS.${res.data.surat.nama}, Ayat ${ket})`;
     conn.sendMessage(id, hasil ,MessageType.text);
 }
-else if (body == '#ping'){
-    const timestamp = speed();
-    const latensi = speed() - timestamp
-    client.sendMessage(from, `Speed: ${latensi.toFixed(4)} _Second_`, msgType.text, {quoted: mek})
+else if (txt == "me") {
+            if (isGroup) {
+                const num = m.participant
+                const picture = num.replace("@s.whatsapp.net", "")
+                try {
+                    pict = await conn.getProfilePicture(picture)
+                } catch {
+                    pict = 'https://user-images.githubusercontent.com/70086013/103155250-749abe00-47d0-11eb-82b1-5b3a4f3182f8.jpg'
+                }
+                const response = await axios({
+                    method: "get",
+                    url: pict,
+                    responseType: 'arraybuffer'
 }
 else if (text == 'assalamualaikum'){
 conn.sendMessage(id, 'Waalaikumsalam' ,MessageType.text);
@@ -307,11 +316,11 @@ conn.sendMessage(id, 'Yo hadir ketik #help kalo mau liat macam2x command nye..' 
 else if (text == '#gay'){
 conn.sendMessage(id, 'Njir, gua curiga nih orng gay..' ,MessageType.text);
 }
-else if (text == 'P'){
-conn.sendMessage(id, '              ' ,MessageType.text);
+else if (text == '#'){
+conn.sendMessage(id, '*. . .*' ,MessageType.text);
 }
-else if (text == 'P'){
-conn.sendMessage(id, '              ' ,MessageType.text);
+else if (text == '!'){
+conn.sendMessage(id, '*. . .*' ,MessageType.text);
 }
 else if (text == '#randomhentai'){
 conn.sendMessage(id, 'Tobat astagfirullah' ,MessageType.text);
