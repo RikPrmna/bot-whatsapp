@@ -112,7 +112,8 @@ console.log(exists);
 conn.sendMessage(id ,`${gg} ${exists ? " exists " : " does not exist"} on WhatsApp`, MessageType.text)
 }
 
-if (text.includes("#say")){
+if (text.includes("#say"))
+if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id){
   const teks = text.replace(/#say /, "")
 conn.sendMessage(id, teks, MessageType.text)
 }
@@ -203,12 +204,12 @@ if (text.includes("#sholat")){
 }
 
 if (text.includes("#spamsms")){
+if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
 const teks = text.replace(/#spamsms /, "")
 axios.get(`https://arugaz.herokuapp.com/api/spamsms?no=${teks}&jum=20`).then((res) => {
 	conn.sendMessage(id, '[WAIT] Proses...❗', MessageType.text)
     let hasil = ` *INFO SPAM SMS 20 PESAN* \n\n _${res.data.logs}_`;
     conn.sendMessage(id, hasil ,MessageType.text);
-if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
 })
 }
 
