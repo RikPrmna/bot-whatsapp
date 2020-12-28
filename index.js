@@ -113,7 +113,8 @@ conn.sendMessage(id ,`${gg} ${exists ? " exists " : " does not exist"} on WhatsA
 }
 
 if (text.includes("#say"))
-if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id){
+if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
+{
   const teks = text.replace(/#say /, "")
 conn.sendMessage(id, teks, MessageType.text)
 }
@@ -167,7 +168,9 @@ axios.get(`https://arugaz.herokuapp.com/api/wiki?q=${teks}`).then((res) => {
 })
 }
 
-if (text.includes("#call")){
+if (text.includes("#call"))
+if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
+{
 const teks = text.replace(/#call /, "")
 axios.get(`https://arugaz.herokuapp.com/api/spamcall?no=${teks}`).then((res) => {
 	conn.sendMessage(id, '[WAIT] Proses...❗', MessageType.text)
