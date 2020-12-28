@@ -301,6 +301,12 @@ conn.sendMessage(id, 'Yo hadir ketik #help kalo mau liat macam2x command nye..' 
 else if (text == '#gay'){
 conn.sendMessage(id, 'Njir, gua curiga nih orng gay..' ,MessageType.text);
 }
+else if (text == 'P'){
+conn.sendMessage(id, '              ' ,MessageType.text);
+}
+else if (text == 'P'){
+conn.sendMessage(id, '              ' ,MessageType.text);
+}
 else if (text == '#randomhentai'){
 conn.sendMessage(id, 'Tobat astagfirullah' ,MessageType.text);
 }
