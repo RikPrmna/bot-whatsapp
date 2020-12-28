@@ -105,7 +105,7 @@ var num = text.replace(/#cek/ , "")
 var idn = num.replace("0","+62");
 
 console.log(id);
-const gg = idn+'@s.whatsapp.net'
+const gg = idn+'@s.whatsapp.net ~ Active'
 
 const exists = await conn.isOnWhatsApp (gg)
 console.log(exists);
@@ -113,7 +113,7 @@ conn.sendMessage(id ,`${gg} ${exists ? " exists " : " does not exist"} on WhatsA
 }
 
 if (text.includes("#say"))
-if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
+if (!m.key.fromMe) return
 {
   const teks = text.replace(/#say /, "")
 conn.sendMessage(id, teks, MessageType.text)
@@ -169,8 +169,7 @@ axios.get(`https://arugaz.herokuapp.com/api/wiki?q=${teks}`).then((res) => {
 }
 
 if (text.includes("#call"))
-if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
-{
+if (!m.key.fromMe) return{
 const teks = text.replace(/#call /, "")
 axios.get(`https://arugaz.herokuapp.com/api/spamcall?no=${teks}`).then((res) => {
 	conn.sendMessage(id, '[WAIT] Proses...❗', MessageType.text)
@@ -824,7 +823,7 @@ if (text.includes("#randomloli"))
     });
     }
 
-if (text.includes("#randomhentai"))
+if (text.includes("#randomimage"))
    {
     var items = ["anime loli sange","anime loli fackgirll"];
     var anim = items[Math.floor(Math.random() * items.length)];
