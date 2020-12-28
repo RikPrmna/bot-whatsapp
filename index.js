@@ -287,7 +287,11 @@ axios.get('https://api.banghasan.com/quran/format/json/acak').then((res) => {
     const ket = `${hs}`.replace(sr, '');
     let hasil = `[${ket}]   ${res.data.acak.ar.teks}\n\n${res.data.acak.id.teks}(QS.${res.data.surat.nama}, Ayat ${ket})`;
     conn.sendMessage(id, hasil ,MessageType.text);
-})
+}
+else if (body == '#ping'){
+    const timestamp = speed();
+    const latensi = speed() - timestamp
+    client.sendMessage(from, `Speed: ${latensi.toFixed(4)} _Second_`, msgType.text, {quoted: mek})
 }
 else if (text == 'assalamualaikum'){
 conn.sendMessage(id, 'Waalaikumsalam' ,MessageType.text);
