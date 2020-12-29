@@ -113,7 +113,7 @@ conn.sendMessage(id ,`${gg} ${exists ? " exists " : " does not exist"} on WhatsA
 }
 
 if (text.includes("#say"))
-if (!m.key.fromMe) return
+if (isOwner) return
 {
   const teks = text.replace(/#say /, "")
 conn.sendMessage(id, teks, MessageType.text)
