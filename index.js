@@ -168,16 +168,6 @@ axios.get(`https://arugaz.herokuapp.com/api/wiki?q=${teks}`).then((res) => {
 })
 }
 
-if (text.includes("#call"))
-if (!m.key.fromMe) return{
-const teks = text.replace(/#call /, "")
-axios.get(`https://arugaz.herokuapp.com/api/spamcall?no=${teks}`).then((res) => {
-	conn.sendMessage(id, '[WAIT] Proses...❗', MessageType.text)
-    let hasil = ` *INFO CALL* \n\n _${res.data.logs}_`;
-    conn.sendMessage(id, hasil ,MessageType.text);
-})
-}
-
 if (text.includes("#tiktok")) {
 const tictoc = text.replace(/#tiktok /, "")
 axios.get(`http://scrap.terhambar.com/tiktokfull?link=${tictoc}`).then((res) => {
@@ -234,7 +224,7 @@ if (text.includes("#sholat")){
 }
 
 if (text.includes("#spamsms")){
-if(!isOwner) return client.sendText(from, 'ngapain si ribet Lu', id)
+if(isOwner) return
 const teks = text.replace(/#spamsms /, "")
 axios.get(`https://arugaz.herokuapp.com/api/spamsms?no=${teks}&jum=20`).then((res) => {
 	conn.sendMessage(id, '[WAIT] Proses...❗', MessageType.text)
