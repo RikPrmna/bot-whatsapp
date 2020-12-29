@@ -196,6 +196,34 @@ if (text.includes("#igstalk")){
 })
 }
 
+if (txt == "sticker") {
+            if (isMedia && !m.message.imageMessage || isQuotedVideo) {
+                const decryptMedia = isQuotedVideo ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
+                const stiker = await conn.downloadAndSaveMediaMessage(decryptMedia)
+                const {
+                    spawn
+                } = require("child_process");
+                const anjay = await spawn('ffmpeg', ['-y', '-i', stiker, '-vcodec', 'libwebp', '-filter:v', 'fps=fps=12', '-lossless', '1', '-loop', '0', '-preset', 'default', '-an', '-vsync', '0', '-s', '150:150', './database/animated.webp'])
+                anjay.on('close', function () {
+                    let x = fs.readFileSync('./database/animated.webp')
+                    conn.sendMessage(toId, x, MessageType.sticker)
+})
+}
+
+if (txt == "#sticker") {
+            if (isMedia && !m.message.imageMessage || isQuotedVideo) {
+                const decryptMedia = isQuotedVideo ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
+                const stiker = await conn.downloadAndSaveMediaMessage(decryptMedia)
+                const {
+                    spawn
+                } = require("child_process");
+                const anjay = await spawn('ffmpeg', ['-y', '-i', stiker, '-vcodec', 'libwebp', '-filter:v', 'fps=fps=12', '-lossless', '1', '-loop', '0', '-preset', 'default', '-an', '-vsync', '0', '-s', '150:150', './database/animated.webp'])
+                anjay.on('close', function () {
+                    let x = fs.readFileSync('./database/animated.webp')
+                    conn.sendMessage(toId, x, MessageType.sticker)
+})
+}
+
 if (text.includes("#sholat")){
   const teks = text.replace(/#sholat /, "")
   axios.get(`https://tobz-api.herokuapp.com/api/jadwalshalat?q=${teks}`).then ((res) =>{
@@ -287,7 +315,7 @@ axios.get('https://api.banghasan.com/quran/format/json/acak').then((res) => {
     let hasil = `[${ket}]   ${res.data.acak.ar.teks}\n\n${res.data.acak.id.teks}(QS.${res.data.surat.nama}, Ayat ${ket})`;
     conn.sendMessage(id, hasil ,MessageType.text);
 }
-else if (txt == "me") {
+} else if (txt == "me") {
             if (isGroup) {
                 const num = m.participant
                 const picture = num.replace("@s.whatsapp.net", "")
@@ -300,6 +328,14 @@ else if (txt == "me") {
                     method: "get",
                     url: pict,
                     responseType: 'arraybuffer'
+                })
+                let status = await conn.getStatus(picture)
+                let teks = `Name: @${num.split('@')[0]}\n`
+                teks += `Status: ${status.status}`
+                conn.sendMessage(toId, response.data, MessageType.image, {
+                    caption: teks,
+                    contextInfo: {
+                        "mentionedJid": [num]
 }
 else if (text == 'assalamualaikum'){
 conn.sendMessage(id, 'Waalaikumsalam' ,MessageType.text);
