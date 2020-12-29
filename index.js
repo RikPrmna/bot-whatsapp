@@ -186,7 +186,7 @@ if (text.includes("#igstalk")){
 })
 }
 
-if (txt == "sticker") {
+if (txt == "#s") {
             if (isMedia && !m.message.imageMessage || isQuotedVideo) {
                 const decryptMedia = isQuotedVideo ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
                 const stiker = await conn.downloadAndSaveMediaMessage(decryptMedia)
@@ -305,7 +305,7 @@ axios.get('https://api.banghasan.com/quran/format/json/acak').then((res) => {
     let hasil = `[${ket}]   ${res.data.acak.ar.teks}\n\n${res.data.acak.id.teks}(QS.${res.data.surat.nama}, Ayat ${ket})`;
     conn.sendMessage(id, hasil ,MessageType.text);
 }
-} else if (txt == "me") {
+} else if (txt == "#me") {
             if (isGroup) {
                 const num = m.participant
                 const picture = num.replace("@s.whatsapp.net", "")
