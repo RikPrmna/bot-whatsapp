@@ -15,8 +15,6 @@ const info = require("./lib/info.js");
 const BotName = 'Shuichi Bot'; // Nama Bot Whatsapp
 const instagramlu = 'Shuichi_kun1'; // Nama Instagramlu cok
 const whatsapplu = '08999045517'; // Nomor whatsapplu cok
-const ownerNumber = ["628999045517@S.whatsapp.net"]
-const isOwner = ownerNumber.includes(sender.id)
 const kapanbotaktif = 'gtw'; // Kapan bot lu aktif
 const grupch1 = 'gk ada'; // OFFICIAL GRUP LU 1
 const grupch2 = 'gk ada'; // OFFICIAL GRUP LU 2
@@ -105,18 +103,11 @@ var num = text.replace(/#cek/ , "")
 var idn = num.replace("0","+62");
 
 console.log(id);
-const gg = idn+'@s.whatsapp.net ~ Active'
+const gg = idn+'@s.whatsapp.net'
 
 const exists = await conn.isOnWhatsApp (gg)
 console.log(exists);
 conn.sendMessage(id ,`${gg} ${exists ? " exists " : " does not exist"} on WhatsApp`, MessageType.text)
-}
-
-if (text.includes("#say"))
-if (isOwner) return
-{
-  const teks = text.replace(/#say /, "")
-conn.sendMessage(id, teks, MessageType.text)
 }
 
 if (text.includes('#nulis')){
@@ -168,6 +159,7 @@ axios.get(`https://arugaz.herokuapp.com/api/wiki?q=${teks}`).then((res) => {
 })
 }
 
+
 if (text.includes("#tiktok")) {
 const tictoc = text.replace(/#tiktok /, "")
 axios.get(`http://scrap.terhambar.com/tiktokfull?link=${tictoc}`).then((res) => {
@@ -186,50 +178,12 @@ if (text.includes("#igstalk")){
 })
 }
 
-if (txt == "#s") {
-            if (isMedia && !m.message.imageMessage || isQuotedVideo) {
-                const decryptMedia = isQuotedVideo ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
-                const stiker = await conn.downloadAndSaveMediaMessage(decryptMedia)
-                const {
-                    spawn
-                } = require("child_process");
-                const anjay = await spawn('ffmpeg', ['-y', '-i', stiker, '-vcodec', 'libwebp', '-filter:v', 'fps=fps=12', '-lossless', '1', '-loop', '0', '-preset', 'default', '-an', '-vsync', '0', '-s', '150:150', './database/animated.webp'])
-                anjay.on('close', function () {
-                    let x = fs.readFileSync('./database/animated.webp')
-                    conn.sendMessage(toId, x, MessageType.sticker)
-})
-}
-
-if (txt == "#sticker") {
-            if (isMedia && !m.message.imageMessage || isQuotedVideo) {
-                const decryptMedia = isQuotedVideo ? JSON.parse(JSON.stringify(m).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : m
-                const stiker = await conn.downloadAndSaveMediaMessage(decryptMedia)
-                const {
-                    spawn
-                } = require("child_process");
-                const anjay = await spawn('ffmpeg', ['-y', '-i', stiker, '-vcodec', 'libwebp', '-filter:v', 'fps=fps=12', '-lossless', '1', '-loop', '0', '-preset', 'default', '-an', '-vsync', '0', '-s', '150:150', './database/animated.webp'])
-                anjay.on('close', function () {
-                    let x = fs.readFileSync('./database/animated.webp')
-                    conn.sendMessage(toId, x, MessageType.sticker)
-})
-}
-
 if (text.includes("#sholat")){
   const teks = text.replace(/#sholat /, "")
   axios.get(`https://tobz-api.herokuapp.com/api/jadwalshalat?q=${teks}`).then ((res) =>{
   conn.sendMessage(id, '[WAIT] Searching...❗', MessageType.text)
   let hasil = `Jadwal sholat di ${teks} hari ini adalah\n\nImsyak : ${res.data.Imsyak}\nSubuh : ${res.data.Subuh} WIB\nDzuhur : ${res.data.Dzuhur}WIB\nAshar : ${res.data.Ashar} WIB\nMaghrib : ${res.data.Maghrib}\nIsya : ${res.data.Isya} WIB\nTengah malam : ${res.data.Dhuha} WIB`;
   conn.sendMessage(id, hasil, MessageType.text);
-})
-}
-
-if (text.includes("#spamsms")){
-if(isOwner) return
-const teks = text.replace(/#spamsms /, "")
-axios.get(`https://arugaz.herokuapp.com/api/spamsms?no=${teks}&jum=20`).then((res) => {
-	conn.sendMessage(id, '[WAIT] Proses...❗', MessageType.text)
-    let hasil = ` *INFO SPAM SMS 20 PESAN* \n\n _${res.data.logs}_`;
-    conn.sendMessage(id, hasil ,MessageType.text);
 })
 }
 
@@ -304,28 +258,7 @@ axios.get('https://api.banghasan.com/quran/format/json/acak').then((res) => {
     const ket = `${hs}`.replace(sr, '');
     let hasil = `[${ket}]   ${res.data.acak.ar.teks}\n\n${res.data.acak.id.teks}(QS.${res.data.surat.nama}, Ayat ${ket})`;
     conn.sendMessage(id, hasil ,MessageType.text);
-}
-} else if (txt == "#me") {
-            if (isGroup) {
-                const num = m.participant
-                const picture = num.replace("@s.whatsapp.net", "")
-                try {
-                    pict = await conn.getProfilePicture(picture)
-                } catch {
-                    pict = 'https://user-images.githubusercontent.com/70086013/103155250-749abe00-47d0-11eb-82b1-5b3a4f3182f8.jpg'
-                }
-                const response = await axios({
-                    method: "get",
-                    url: pict,
-                    responseType: 'arraybuffer'
-                })
-                let status = await conn.getStatus(picture)
-                let teks = `Name: @${num.split('@')[0]}\n`
-                teks += `Status: ${status.status}`
-                conn.sendMessage(toId, response.data, MessageType.image, {
-                    caption: teks,
-                    contextInfo: {
-                        "mentionedJid": [num]
+})
 }
 else if (text == 'assalamualaikum'){
 conn.sendMessage(id, 'Waalaikumsalam' ,MessageType.text);
@@ -341,12 +274,6 @@ conn.sendMessage(id, 'Yo hadir ketik #help kalo mau liat macam2x command nye..' 
 }
 else if (text == '#gay'){
 conn.sendMessage(id, 'Njir, gua curiga nih orng gay..' ,MessageType.text);
-}
-else if (text == '#'){
-conn.sendMessage(id, '*. . .*' ,MessageType.text);
-}
-else if (text == '!'){
-conn.sendMessage(id, '*. . .*' ,MessageType.text);
 }
 else if (text == '#randomhentai'){
 conn.sendMessage(id, 'Tobat astagfirullah' ,MessageType.text);
@@ -858,7 +785,7 @@ if (text.includes("#randomloli"))
     });
     }
 
-if (text.includes("#randomimage"))
+if (text.includes("#randomhentai"))
    {
     var items = ["anime loli sange","anime loli fackgirll"];
     var anim = items[Math.floor(Math.random() * items.length)];
