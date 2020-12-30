@@ -758,27 +758,28 @@ if (text.includes("#alay")){
 
 if (text.includes("#randomloli"))
    {
-    var items = ["anime loli","anime loli sange","anime loli fackgirll","anime loli i love you"];
-    var nime = items[Math.floor(Math.random() * items.length)];
-    var url = "https://api.fdci.se/rep.php?gambar=" + nime;
-    
-    axios.get(url)
-      .then((result) => {
-        var n = JSON.parse(JSON.stringify(result.data));
-        var nimek =  n[Math.floor(Math.random() * n.length)];
-        imageToBase64(nimek) 
-        .then(
-            (response) => {
-	var buf = Buffer.from(response, 'base64'); 
-              conn.sendMessage(
-            id,
-              buf,MessageType.image)
+const axios = require("axios")
+const imageToBase64 = require('image-to-base64');
+
+const loli = () => {
+    return new Promise((resolve, reject) => {
+        var url = `https://arugaz.herokuapp.com/api/randomloli`
+        axios.get(url)
+            .then(res => {
+                imageToBase64(res.data.image)
+                    .then(data => {
+                        var buffer = Buffer.from(data, 'base64')
+                        resolve(buffer)
+                    })
+            })
+            .catch(err => {
+                reject('sepertinya error.')
+            })
+    })
+}
+
+module.exports = loli
        
-            }
-        )
-        .catch(
-            (error) => {
-                console.log(error);
             }
         )
     
